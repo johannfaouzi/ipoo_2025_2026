@@ -1,0 +1,32 @@
+DICT_BASE_POKEMON = {
+    "Dracaufeu": {
+        "id_": 6,
+        "nom": "Dracaufeu",
+        "types": ("FEU", "VOL"),
+        "stat_pv": 78,
+        "stat_attaque": 84,
+        "stat_defense": 78,
+        "stat_attaque_speciale": 109,
+        "stat_defense_speciale": 85,
+    },
+    "Tortank": {
+        "id_": 9,
+        "nom": "Tortank",
+        "types": ("EAU",),
+        "stat_pv": 79,
+        "stat_attaque": 83,
+        "stat_defense": 100,
+        "stat_attaque_speciale": 85,
+        "stat_defense_speciale": 105,
+    },
+    "Pikachu": {
+        "id_": 25,
+        "nom": "Pikachu",
+        "types": ("ELECTRIK",),
+        "stat_pv": 35,
+        "stat_attaque": 55,
+        "stat_defense": 40,
+        "stat_attaque_speciale": 50,
+        "stat_defense_speciale": 50,
+    },
+}
