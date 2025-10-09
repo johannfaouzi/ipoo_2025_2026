@@ -1,11 +1,13 @@
 """Un module avec des fonctions diverses et variées."""
 
+import datetime
+from typing import Callable
 
-def verifier_nombre_parfait(n):
-    """"Vérifie si un nombre est parfait.
 
-    Un nombre parfait est un entier naturel égal à la somme de ses diviseurs
-    stricts.
+def verifier_nombre_parfait(n: int) -> bool:
+    """ "Vérifie si un nombre est parfait.
+
+    Un nombre parfait est un entier naturel égal à la somme de ses diviseurs stricts.
 
     Parameters
     ----------
@@ -39,15 +41,13 @@ def verifier_nombre_parfait(n):
 
     # Cas x > 1
     for x in range(2, n):
-        if n%x == 0:
+        if n % x == 0:
             dividers.append(x)
 
     return sum(dividers) == n
 
 
-
-
-def verifier_pangramme(text):
+def verifier_pangramme(text: str) -> bool:
     """Vérifie si une chaîne de caractères est un pangramme.
 
     Un pangramme est une phrase contenant toutes les lettres de l'alphabet.
@@ -80,16 +80,18 @@ def verifier_pangramme(text):
     False
     """
     # Convert all the characters to lower cases
-    text_lower = text.lower()
+    text_lower: str = text.lower()
 
     # Check, for each letter, if it is present in the lowercase text
+    letter: str
     for n in range(97, 123):
         letter = chr(n)
-        if not letter in text_lower:
+        if letter not in text_lower:
             return False
-    return(True)
+    return True
 
-def trier_liste_trait(text):
+
+def trier_liste_trait(text: str) -> str:
     """Trie une chaîne de caractères où les mots sont séparés par des traits.
 
     Parameters
@@ -113,21 +115,21 @@ def trier_liste_trait(text):
     # Meilleure version : words = '-'.join(sorted(text.split('-')))
 
     # Sépare les mots dans une liste
-    words=text.split('-')
+    words: list[str] = text.split("-")
 
     # Trie la liste
-    words_sorted=sorted(words)
+    words_sorted: list[str] = sorted(words)
 
     # Récupère le premier mot
-    res=f'{words_sorted[0]}'
+    res: str = f"{words_sorted[0]}"
 
     # Ajoute un trait d'union et le mot suivant pour les mots restants
     for word in words_sorted[1:]:
-        res+=f'-{word}'
+        res += f"-{word}"
     return res
 
 
-def position(mots, x, n):
+def position(mots: list[str], x: str, n: int) -> list[str]:
     """Renvoie la liste des mots ayant le caractère x à la n-ième position.
 
     Parameters
@@ -167,7 +169,9 @@ def position(mots, x, n):
     return [word for word in mots if word[n : n + 1] == x]
 
 
-def suites_recurrentes_premier_ordre(u0, v0, fu, fv, n):
+def suites_recurrentes_premier_ordre(
+    u0: float, v0: float, fu: Callable[[float, float], float], fv: Callable[[float, float], float], n: int
+) -> tuple[float, float]:
     """Calcul les valeurs des deux suites récurrentes du premier ordre.
 
     On considère deux suites récurrentes (u_k)_k et (v_k)_k définies par :
@@ -176,7 +180,8 @@ def suites_recurrentes_premier_ordre(u0, v0, fu, fv, n):
             + u_k = fu(u_{k-1}, v_{k-1})
             + v_k = fv(u_{k-1}, v_{k-1})
 
-    Cette fonction renvoie les valeurs u_n et v_n des suites (u_k)_k et (v_k)_k.
+    Cette fonction renvoie les valeurs u_n et v_n des suites (u_k)_k et
+    (v_k)_k.
 
     Parameters
     ----------
@@ -200,15 +205,16 @@ def suites_recurrentes_premier_ordre(u0, v0, fu, fv, n):
 
     # Récurrence
     for _ in range(n):
-        u,v=fu(u, v),fv(u, v)
+        u, v = fu(u, v), fv(u, v)
 
     return u, v
 
 
-def verifier_nombre_palindrome(n):
+def verifier_nombre_palindrome(n: int) -> bool:
     """Vérifie si un nombre est un palindrome.
 
-    Un nombre est un palindrome si et seulement s'il se lit de la même façon de la gauche vers la droite ou de la droite vers la gauche.
+    Un nombre est un palindrome si et seulement s'il se lit de la même façon
+    de la gauche vers la droite ou de la droite vers la gauche.
 
     Parameters
     ----------
@@ -237,20 +243,17 @@ def verifier_nombre_palindrome(n):
     # n_str = str(n)
     # return n_str == n_str[::-1]
 
-    n_copy     = n
+    n_copy = n
     n_reversed = 0
     while n != 0:
-        r          = n%10
-        n_reversed = n_reversed*10+r
-        n          = n//10
+        r = n % 10
+        n_reversed = n_reversed * 10 + r
+        n = n // 10
 
     return n_reversed == n_copy
 
 
-import datetime
-
-
-def calculer_nombre_jours_restants_anniversaire(date_naissance):
+def calculer_nombre_jours_restants_anniversaire(date_naissance: datetime.date) -> int:
     """Calcule le nombre de jours restants jusqu'au prochain anniversaire.
 
     Parameters
@@ -264,19 +267,20 @@ def calculer_nombre_jours_restants_anniversaire(date_naissance):
         Nombre de jours jusqu'au prochain anniversaire.
 
     """
-    #Récupère la date d'aujourd'hui
-    today = date_naissance.today()
+    # Récupère la date d'aujourd'hui
+    today: datetime.date = date_naissance.today()
 
-    #Calcule la date d'anniversaire de cette année
+    # Calcule la date d'anniversaire de cette année
+    next_birthday: datetime.date
     next_birthday = datetime.date(today.year, date_naissance.month, date_naissance.day)
 
-    #Calcule le nombre de jours entre la date d'anniversaire de cette année
-    res = (next_birthday - today).days
+    # Calcule le nombre de jours entre la date d'anniversaire de cette année
+    res: int = (next_birthday - today).days
 
-    #Si le nombre de jours est négatif
+    # Si le nombre de jours est négatif
     if res < 0:
-        #Le porochain anniversaire est l'année prochaine
+        # Le porochain anniversaire est l'année prochaine
         next_birthday = datetime.date(today.year + 1, date_naissance.month, date_naissance.day)
         res = (next_birthday - today).days
 
-    return(res)
+    return res
