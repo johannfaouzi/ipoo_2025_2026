@@ -7,7 +7,6 @@ extend-select = ["E", "F", "W", "I"]
 
 [tool.black]
 line-length = 120
-extend-exclude = "fonctions_original.py"
 
 [tool.pytest.ini_options]
 doctest_optionflags = "NORMALIZE_WHITESPACE ELLIPSIS"
@@ -16,4 +15,4 @@ addopts = [
 ]
 
 [tool.mypy]
-exclude = ["test_", "conftest.py", "main.py"]
+exclude = ["test_", "conftest.py"]
